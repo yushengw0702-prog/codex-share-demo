@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>转场效果测试编辑器</title>
+    <link rel="stylesheet" href="styles.css?v=ui-style-switch-1">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="preview-pane" aria-label="分享页预览">
+        <div class="phone-frame">
+          <canvas id="previewCanvas" width="720" height="1560" aria-label="转场动画预览"></canvas>
+        </div>
+      </section>
+
+      <aside class="control-panel" aria-label="转场编辑器">
+        <div class="panel-heading">
+          <p class="eyebrow">Share Motion Lab</p>
+          <h1>转场效果测试编辑器</h1>
+          <a class="mode-link" href="pov.html">打开横屏 POV 转场</a>
+        </div>
+
+        <div class="control-group">
+          <h2>素材</h2>
+          <div class="asset-grid">
+            <label class="asset-input">
+              <span>原始素材</span>
+              <input id="sourceInput" type="file" accept="image/*,video/*">
+              <strong id="sourceName">image (42).png</strong>
+            </label>
+            <label class="asset-input">
+              <span>成果素材</span>
+              <input id="resultInput" type="file" accept="image/*,video/*">
+              <strong id="resultName">图片转2D平台跳跃游戏视频.mp4</strong>
+            </label>
+          </div>
+        </div>
+
+        <div class="control-group compact">
+          <h2>UI 风格</h2>
+          <div class="segmented two-up" role="radiogroup" aria-label="选择手机分享页 UI 风格">
+            <button class="ui-style-button is-active" type="button" data-ui-style="sticker" role="radio" aria-checked="true">贴纸卡</button>
+            <button class="ui-style-button" type="button" data-ui-style="poster" role="radio" aria-checked="false">报告画报</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <h2>转场</h2>
+          <div class="segmented" role="radiogroup" aria-label="选择转场效果">
+            <button class="effect-button is-active" type="button" data-effect="light" role="radio" aria-checked="true">光线扫过</button>
+            <button class="effect-button" type="button" data-effect="sticker" role="radio" aria-checked="false">贴纸揭幕</button>
+            <button class="effect-button" type="button" data-effect="brush" role="radio" aria-checked="false">画笔显影</button>
+            <button class="effect-button" type="button" data-effect="tiles" role="radio" aria-checked="false">像素拼合</button>
+            <button class="effect-button" type="button" data-effect="focus" role="radio" aria-checked="false">聚焦变身</button>
+            <button class="effect-button" type="button" data-effect="page" role="radio" aria-checked="false">翻页切换</button>
+            <button class="effect-button" type="button" data-effect="sparkle" role="radio" aria-checked="false">星点成形</button>
+            <button class="effect-button" type="button" data-effect="outline" role="radio" aria-checked="false">边框描亮</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <h2>镜头效果</h2>
+          <div class="segmented" role="radiogroup" aria-label="选择转场后的镜头效果">
+            <button class="camera-button is-active" type="button" data-camera="none" role="radio" aria-checked="true">无</button>
+            <button class="camera-button" type="button" data-camera="push" role="radio" aria-checked="false">轻推近</button>
+            <button class="camera-button" type="button" data-camera="settle" role="radio" aria-checked="false">弹性靠近</button>
+            <button class="camera-button" type="button" data-camera="slow" role="radio" aria-checked="false">慢慢拉近</button>
+            <button class="camera-button" type="button" data-camera="pan" role="radio" aria-checked="false">左右跟随</button>
+            <button class="camera-button" type="button" data-camera="breathe" role="radio" aria-checked="false">轻微呼吸</button>
+          </div>
+        </div>
+
+        <div class="control-group compact">
+          <label class="range-row" for="totalDurationRange">
+            <span>完整时长</span>
+            <strong id="totalDurationValue">8.0s</strong>
+          </label>
+          <input id="totalDurationRange" type="range" min="4" max="20" step="0.5" value="8">
+        </div>
+
+        <div class="control-group compact">
+          <label class="range-row" for="durationRange">
+            <span>转场时长</span>
+            <strong id="durationValue">3.2s</strong>
+          </label>
+          <input id="durationRange" type="range" min="1.2" max="7.5" step="0.1" value="3.2">
+          <p id="timelineNote" class="timeline-note">原始停留 1.8s，转场 3.2s，成果停留 3.0s。</p>
+        </div>
+
+        <div class="control-group compact">
+          <h2>播放结束方式</h2>
+          <div class="segmented two-up" role="radiogroup" aria-label="选择播放结束方式">
+            <button class="play-mode-button is-active" type="button" data-video-mode="loop" role="radio" aria-checked="true">循环播放</button>
+            <button class="play-mode-button" type="button" data-video-mode="once" role="radio" aria-checked="false">播完停住</button>
+          </div>
+        </div>
+
+        <div class="control-group compact">
+          <label class="range-row" for="fitMode">
+            <span>素材适配</span>
+          </label>
+          <select id="fitMode">
+            <option value="contain" selected>完整画面</option>
+            <option value="cover">铺满画框</option>
+          </select>
+        </div>
+
+        <div class="actions">
+          <button id="playButton" class="primary-action" type="button">
+            <span class="icon" aria-hidden="true">▶</span>
+            <span>播放</span>
+          </button>
+          <button id="exportButton" class="secondary-action" type="button">
+            <span class="icon" aria-hidden="true">↓</span>
+            <span>导出 WebM</span>
+          </button>
+        </div>
+
+        <a id="downloadLink" class="download-link" hidden>下载转场视频</a>
+        <p id="statusLine" class="status-line" role="status">默认素材已载入。</p>
+      </aside>
+    </main>
+
+    <script src="app.js?v=poster-copy-fit-2"></script>
+  </body>
+</html>

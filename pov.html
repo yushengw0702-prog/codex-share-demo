@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>POV 横屏一镜到底转场</title>
+    <link rel="stylesheet" href="pov.css">
+  </head>
+  <body>
+    <main class="pov-editor">
+      <section class="preview-card" aria-label="横屏转场预览">
+        <div class="preview-toolbar">
+          <div>
+            <p class="eyebrow">POV Take Lab</p>
+            <h1>横屏一镜到底转场</h1>
+          </div>
+          <a class="ghost-link" href="index.html">竖屏转场 demo</a>
+        </div>
+        <div class="landscape-frame">
+          <canvas id="povCanvas" width="1280" height="720" aria-label="横屏 POV 转场预览"></canvas>
+        </div>
+      </section>
+
+      <aside class="control-card" aria-label="横屏转场控制台">
+        <div class="control-group">
+          <h2>素材</h2>
+          <div class="asset-grid">
+            <label class="asset-input">
+              <span>涂鸦原图</span>
+              <input id="sourceInput" type="file" accept="image/*,video/*">
+              <strong id="sourceName">测试1-原图.png</strong>
+            </label>
+            <label class="asset-input">
+              <span>游戏成品</span>
+              <input id="resultInput" type="file" accept="image/*,video/*">
+              <strong id="resultName">测试1-成品.mov</strong>
+            </label>
+          </div>
+        </div>
+
+        <div class="control-group compact">
+          <label class="range-row" for="durationRange">
+            <span>完整时长</span>
+            <strong id="durationValue">8.5s</strong>
+          </label>
+          <input id="durationRange" type="range" min="7" max="9" step="0.1" value="8.5">
+        </div>
+
+        <div class="control-group compact">
+          <label class="range-row" for="holdRange">
+            <span>电视前停留</span>
+            <strong id="holdValue">2.5s</strong>
+          </label>
+          <input id="holdRange" type="range" min="2" max="3" step="0.1" value="2.5">
+          <p id="timelineNote" class="timeline-note">俯视停留 1.1s，抬镜 4.9s，电视前停留 2.5s。</p>
+        </div>
+
+        <div class="control-group compact">
+          <h2>播放结束方式</h2>
+          <div class="segmented" role="radiogroup" aria-label="选择播放结束方式">
+            <button class="mode-button is-active" type="button" data-mode="loop" role="radio" aria-checked="true">循环播放</button>
+            <button class="mode-button" type="button" data-mode="once" role="radio" aria-checked="false">播完停住</button>
+          </div>
+        </div>
+
+        <div class="control-group compact">
+          <label class="range-row" for="fitMode">
+            <span>素材适配</span>
+          </label>
+          <select id="fitMode">
+            <option value="contain" selected>完整显示</option>
+            <option value="cover">铺满裁切</option>
+          </select>
+        </div>
+
+        <div class="actions">
+          <button id="playButton" class="primary-action" type="button">
+            <span class="icon" aria-hidden="true">▶</span>
+            <span>播放</span>
+          </button>
+          <button id="exportButton" class="secondary-action" type="button">
+            <span class="icon" aria-hidden="true">↓</span>
+            <span>导出横屏 WebM</span>
+          </button>
+        </div>
+
+        <a id="downloadLink" class="download-link" hidden>下载横屏转场视频</a>
+        <p id="statusLine" class="status-line" role="status">默认素材已载入。</p>
+      </aside>
+    </main>
+
+    <script src="pov.js"></script>
+  </body>
+</html>
