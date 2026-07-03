@@ -2051,7 +2051,7 @@ canvas.addEventListener("wheel", (event) => {
 
 function initDefaults() {
   state.source = createImageMedia(encodeURI("视频素材1/image (42).png"), "image (42).png");
-  state.result = createVideoMedia(encodeURI("视频素材1/图片转2D平台跳跃游戏视频.mp4"), "图片转2D平台跳跃游戏视频.mp4");
+  state.result = createVideoMedia(encodeURI("视频素材1/录屏2026-06-17 11.14.29.mov"), "录屏2026-06-17 11.14.29.mov");
   syncTimingControls();
   applyVideoMode();
 }
